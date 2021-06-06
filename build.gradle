@@ -2,11 +2,22 @@ plugins {
 	id 'org.springframework.boot' version '2.4.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'checkstyle'
 }
 
 group = 'com.udomomo'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+checkstyle {
+	toolVersion '8.43'
+	configFile file('./config/google_checkstyle.xml')
+}
+
+bootJar {
+	archiveFileName = 'spring-boot-kafka-consumer.jar'
+	mainClass = 'com.udomomo.springbootkafkaconsumer.Application'
+}
 
 configurations {
 	compileOnly {
@@ -21,10 +32,6 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.kafka:spring-kafka'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.kafka:spring-kafka-test'
 }
 
 test {
