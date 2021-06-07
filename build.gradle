@@ -29,9 +29,24 @@ repositories {
 	mavenCentral()
 }
 
+dependencyManagement {
+	dependencies {
+		dependency 'org.springframework.boot:spring-boot-starter:2.4.2'
+		dependency 'org.springframework.kafka:spring-kafka:2.6.5'
+		dependency 'org.projectlombok:lombok:1.18.20'
+	}
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.kafka:spring-kafka'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
