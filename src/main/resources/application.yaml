@@ -1,7 +1,4 @@
 kafka:
   bootstrap-servers: http://localhost:9093
-  group-id: kafka-consumer
+  group-id: foo
   topic: my-topic
-management:
-  endpoints.web.exposure:
-    include: beans
