@@ -24,9 +24,3 @@ $ java -jar build/libs/spring-boot-kafka-consumer.jar
 ```
 docker-compose -f kafka/docker-compose.yaml exec kafka /opt/bitnami/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-topic --property "parse.key=true" --property "key.separator=,"
 ```
-
-```
-$ cd kafka
-$ docker-compose up -d
-$ docker-compose exec kafka /opt/bitnami/kafka/bin/kafka-topics.sh --create --topic my-topic --bootstrap-server localhost:9092
-```
