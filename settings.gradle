@@ -1,1 +1,4 @@
 rootProject.name = 'spring-boot-kafka-consumer'
+include 'producer'
+include 'consumer'
+include 'producer'

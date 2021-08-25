@@ -2,6 +2,7 @@ package com.udomomo.springbootkafkaconsumer.config;
 
 import com.udomomo.springbootkafkaconsumer.settings.KafkaSettings;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -21,9 +22,9 @@ import java.util.Map;
 @EnableConfigurationProperties({KafkaSettings.class})
 public class KafkaConfig {
   @Bean
-  KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>>
+  KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, Long>>
   kafkaListenerContainerFactory(KafkaSettings settings) {
-    ConcurrentKafkaListenerContainerFactory<String, String> factory =
+    ConcurrentKafkaListenerContainerFactory<String, Long> factory =
             new ConcurrentKafkaListenerContainerFactory<>();
     factory.setConsumerFactory(consumerFactory(settings));
     factory.getContainerProperties().setPollTimeout(3000);
@@ -31,12 +32,12 @@ public class KafkaConfig {
   }
 
   @Bean
-  public ConsumerFactory<String, String> consumerFactory(KafkaSettings settings) {
+  public ConsumerFactory<String, Long> consumerFactory(KafkaSettings settings) {
     Map<String, Object> props = new HashMap<>();
     props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, settings.getBootstrapServers());
     props.put(ConsumerConfig.GROUP_ID_CONFIG, settings.getGroupId());
     props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
 
     return new DefaultKafkaConsumerFactory<>(props);
   }
