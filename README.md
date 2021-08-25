@@ -1,26 +1,28 @@
-# spring-boot-kafka-consumer
-Let's consume Kafka message on Spring Boot
+# spring-boot-kafka-practice
+- use Spring Kafka to produce and consume messages
 
 # prerequisites
 - Java 11 or later
 
 # How to run
-- Run Kafka broker
+- Run Kafka broker and create topic
+- TODO: Make topic automatically created
 
 ```
 $ docker-compose -f kafka/docker-compose.yaml up -d
-$ docker-compose -f kafka/docker-compose.yaml exec kafka /opt/bitnami/kafka/bin/kafka-topics.sh --create --topic my-topic
+$ docker-compose -f kafka/docker-compose.yaml exec kafka /opt/bitnami/kafka/bin/kafka-topics.sh --create --topic my-topic --replication-factor 1 --partitions 1
 ```
 
-- Run Spring Boot
+- Run Kafka Producer
 
 ```
-$ ./gradlew bootJar
-$ java -jar build/libs/spring-boot-kafka-consumer.jar
+$ ./gradlew :producer:bootJar
+$ java -jar producer/build/libs/spring-boot-kafka-producer.jar
 ```
 
-- Produce message
+- Run Kafka Consumer
 
 ```
-docker-compose -f kafka/docker-compose.yaml exec kafka /opt/bitnami/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-topic --property "parse.key=true" --property "key.separator=,"
+$ ./gradlew :consumer:bootJar
+$ java -jar consumer/build/libs/spring-boot-kafka-consumer.jar
 ```

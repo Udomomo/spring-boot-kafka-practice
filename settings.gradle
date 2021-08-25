@@ -1,4 +1,3 @@
-rootProject.name = 'spring-boot-kafka-consumer'
+rootProject.name = 'spring-boot-kafka-practice'
 include 'producer'
 include 'consumer'
-include 'producer'

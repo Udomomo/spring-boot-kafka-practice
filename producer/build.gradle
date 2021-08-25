@@ -5,7 +5,7 @@ springBoot {
 }
 
 bootJar {
-    archiveFileName = 'spring-boot-kafka-consumer.jar'
+    archiveFileName = 'spring-boot-kafka-producer.jar'
     mainClass.set('com.udomomo.springbootkafkaproducer.Application')
 }
 
