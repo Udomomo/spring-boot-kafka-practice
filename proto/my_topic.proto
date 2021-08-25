@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package proto;
+
+option java_multiple_files = true;
+option java_package = "com.udomomo.springbootkafkapractice.proto";
+
+message MyTopicEntry {
+  string movie_name = 1;
+  enum LOCATION {
+    UNKNOWN = 0;
+    THEATER = 1;
+    STREAMING = 2;
+  }
+  LOCATION location = 2;
+  int32 box_office = 3;
+}

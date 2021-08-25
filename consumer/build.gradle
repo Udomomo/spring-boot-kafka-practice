@@ -1,4 +1,6 @@
 apply plugin: 'org.springframework.boot'
+apply plugin: 'com.google.protobuf'
+apply plugin: 'idea'
 
 springBoot {
     mainClass.set('com.udomomo.springbootkafkaconsumer.Application')
@@ -12,9 +14,27 @@ bootJar {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'com.google.protobuf:protobuf-java'
 
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir "$rootDir/proto"
+        }
+        java {
+            srcDirs "$buildDir/generated/source/proto/main/java"
+        }
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.17.3'
+    }
 }
